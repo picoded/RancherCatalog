@@ -1,10 +1,7 @@
 # Name of the Catalog Entry
 name: essential
 # Description of the Catalog Entry
-description: >
-  Essential docker containers, that should be run with every instance.
-  You may however disable them, with the use of tags (though i do not see why).
-  Such as; no-essential=true, no-haveged=true, no-logrotate=true
+description: "Essential docker containers, that should be run with every instance"
 # Version of the Catalog to be used
 version: 0
 # Category to be used for searching catalog entries
