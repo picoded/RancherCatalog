@@ -5,7 +5,9 @@
 Essential docker containers, that should be run with every instance.
 You may however disable them, with the use of tags (though i do not see why).
 
-## Tags:
+Note this deploy on all instances within a cluster
+
+## Instance Control Tags:
 
 Disable the stack
 `no-essential=true`
