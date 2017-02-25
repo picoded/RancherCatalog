@@ -1,5 +1,11 @@
+#
+# Docker container definition
+#
 version: '2'
 services:
+  #
+  # haveged deployment
+  #
   haveged:
     privileged: true
     image: picoded/haveged
