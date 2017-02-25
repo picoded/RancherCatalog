@@ -1,6 +1,6 @@
 # Essential docker container stack
 
-Essential docker containers, that should be run with every instance.
+Essential docker containers, that should run with every instance.
 You may however disable them, with the use of tags (though i do not see why).
 
 Note this deploy on all instances within a cluster

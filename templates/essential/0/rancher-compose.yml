@@ -4,7 +4,7 @@
 .catalog:
   name: "essential"
   version: "v1.0.0"
-  description: "Essential docker containers, that should be run with every instance"
+  description: "Essential docker containers, that should run with every instance"
   minimum_rancher_version: v0.9.0
   uuid: picoded-essential-0
 #
