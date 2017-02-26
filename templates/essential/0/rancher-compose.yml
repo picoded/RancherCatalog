@@ -14,3 +14,6 @@ version: '2'
 services:
   haveged:
     start_on_create: true
+services:
+  logrotate:
+    start_on_create: true
