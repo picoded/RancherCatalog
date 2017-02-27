@@ -48,7 +48,7 @@ services:
     image: picoded/docker-filebeat
     environment:
       ES_PORT: '80'
-      ES_PREFIX: docker-filebeat-%{+yyyy.MM.dd}
+      ES_INDEX: ${filebeat_es_index}
     stdin_open: true
     volumes:
     - /var/lib/docker/containers/:/var/lib/docker/containers/:rw

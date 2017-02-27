@@ -68,7 +68,7 @@
     - variable: "filebeat_es_index"
       label: "Filebeat Elasticsearch Index:"
       description: "Label for logging server with AWS Elasticsearch access, with ${label}=true value"
-      default: 'aws-logserver'
+      default: 'docker-filebeat-%{+yyyy.MM.dd}'
       required: true
       type: "string"
 #
