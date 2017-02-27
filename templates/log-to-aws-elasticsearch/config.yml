@@ -1,7 +1,7 @@
 # Name of the Catalog Entry
 name: "log to AWS Elasticsearch"
 # Description of the Catalog Entry
-description: "Filebeat logging pipeline from docker to elasticsearch"
+description: "Filebeat logging pipeline from docker to AWS elasticsearch"
 # Version of the Catalog to be used
 version: "v1.0.0"
 # Category to be used for searching catalog entries

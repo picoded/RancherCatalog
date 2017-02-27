@@ -4,7 +4,7 @@
 .catalog:
   name: "log to aws elasticsearch"
   version: "v1.0.0"
-  description: "Filebeat logging pipeline from docker to elasticsearch"
+  description: "Filebeat logging pipeline from docker to AWS elasticsearch"
   minimum_rancher_version: v0.9.0
   uuid: picoded-log-to-aws-es-0
   questions:
@@ -67,7 +67,7 @@
     #
     - variable: "filebeat_es_index"
       label: "Filebeat Elasticsearch Index:"
-      description: "Label for logging server with AWS Elasticsearch access, with ${label}=true value"
+      description: "Index name to save to in elasticsearch"
       default: 'docker-filebeat-%{+yyyy.MM.dd}'
       required: true
       type: "string"
