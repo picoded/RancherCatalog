@@ -4,7 +4,7 @@
 .catalog:
   name: "log to aws elasticsearch"
   version: "v1.0.0"
-  description: "Filebeat pipeline from docker to elasticsearch"
+  description: "Filebeat logging pipeline from docker to elasticsearch"
   minimum_rancher_version: v0.9.0
   uuid: picoded-log-to-aws-es-0
   questions:
