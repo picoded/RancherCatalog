@@ -1,0 +1,84 @@
+#
+# Catalog options configuration
+#
+.catalog:
+  name: "log to aws elasticsearch"
+  version: "v1.0.0"
+  description: "Filebeat pipeline from docker to elasticsearch"
+  minimum_rancher_version: v0.9.0
+  uuid: picoded-log-to-aws-es-0
+  questions:
+    #
+    # Elasticsearch endpoint for AWS
+    #
+    - variable: "aws_es_host"
+      label: "Elasticsearch host:"
+      description: "Password for elasticsearch / kibana"
+      default: ''
+      required: true
+      type: "string"
+    #
+    # HTTP Auth user for AWS elasticsearch (if you want to access publicly)
+    #
+    - variable: "user"
+      label: "Username:"
+      description: "User login for elasticsearch / kibana"
+      default: 'picoded'
+      required: true
+      type: "string"
+    #
+    # HTTP Auth pass for AWS elasticsearch (if you want to access publicly)
+    #
+    - variable: "pass"
+      label: "Password:"
+      description: "Password for elasticsearch / kibana - avoid spaces, and dollar signs (not tested)"
+      default: 'isAwesome!'
+      required: true
+      type: "string"
+    #
+    # Elasticsearch protocall for AWS
+    #
+    - variable: "aws_es_prot"
+      label: "Elasticsearch HTTP(S) Protocall:"
+      description: "http / https only"
+      default: 'https'
+      required: true
+      type: "string"
+    #
+    # Elasticsearch port for AWS
+    #
+    - variable: "aws_es_port"
+      label: "Elasticsearch Port:"
+      description: "80 / 443 / 9200"
+      default: '443'
+      required: true
+      type: "string"
+    #
+    # AWS server labels to deploy Elastic search proxy access
+    #
+    - variable: "aws_nodelabel"
+      label: "AWS Log Server Label:"
+      description: "Label for logging server with AWS Elasticsearch access, with ${label}=true value"
+      default: 'aws-logserver'
+      required: true
+      type: "string"
+    #
+    # AWS server labels to deploy Elastic search proxy access
+    #
+    - variable: "filebeat_es_index"
+      label: "Filebeat Elasticsearch Index:"
+      description: "Label for logging server with AWS Elasticsearch access, with ${label}=true value"
+      default: 'aws-logserver'
+      required: true
+      type: "string"
+#
+# Actual service definition
+#
+version: '2'
+services:
+  elasticsearch-auth:
+    start_on_create: true
+  elasticsearch-proxy:
+    start_on_create: true
+  docker-filebeat:
+    start_on_create: true
