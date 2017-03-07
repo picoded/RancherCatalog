@@ -1,0 +1,26 @@
+#
+# Catalog options configuration
+#
+.catalog:
+  name: "CatalogName"
+  version: "v1.0.0"
+  description: "CatalogDescription"
+  minimum_rancher_version: v0.9.0
+  uuid: picoded-unique-id-0
+  questions:
+    #
+    # Form to fill up
+    #
+    - variable: "variable_name"
+      label: "Label:"
+      description: "Description"
+      default: ''
+      required: true
+      type: "string"
+#
+# Actual service definition
+#
+version: '2'
+services:
+  service-name:
+    start_on_create: true
