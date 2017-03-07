@@ -1,0 +1,56 @@
+#
+# Catalog options configuration
+#
+.catalog:
+  name: "Gitlab"
+  version: "v1.0.0"
+  description: "Simple self contained gitlab installation"
+  minimum_rancher_version: v0.9.0
+  uuid: picoded-gitlab
+  questions:
+    #
+    # URL hostname (important)
+    #
+    - variable: "gitlab_hostname"
+      label: "Host Name:"
+      description: "Public hostname of gitlab server. Eg: gitlab.company.com"
+      default: ''
+      required: true
+      type: "string"
+    #
+    # Host allocation for catalog
+    #
+    - variable: "gitlab_label"
+      label: "Host Label:"
+      description: "Hostlabel key name = true, server target"
+      default: 'gitlab'
+      required: true
+      type: "string"
+    #
+    # Memory limit allocation of gitlab server
+    #
+    - variable: "gitlab_mem"
+      label: "Mem Limit (in bytes):"
+      description: "X-GB * 1024 * 1024 * 1024"
+      default: '4294967296'
+      required: true
+      type: "string"
+#
+# Actual service definition
+#
+version: '2'
+services:
+  gitlab-data:
+    scale: 1
+    retain_ip: true
+  gitlab-server:
+    scale: 1
+    retain_ip: true
+    health_check:
+      port: 80
+      interval: 60000
+      initializing_timeout: 600000
+      unhealthy_threshold: 3
+      strategy: none
+      response_timeout: 60000
+      healthy_threshold: 2
