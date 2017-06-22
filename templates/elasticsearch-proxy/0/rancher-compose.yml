@@ -1,0 +1,98 @@
+#
+# Catalog options configuration
+#
+.catalog:
+  name: "log to aws elasticsearch"
+  version: "v1.0.0"
+  description: "Elasticsearch proxy gateway, its main use case is to provide a proxy for AWS elasticsearch"
+  minimum_rancher_version: v0.9.0
+  uuid: es-proxy-0
+  questions:
+    #
+    # Elasticsearch endpoint for AWS
+    #
+    - variable: "target_es_host"
+      label: "Elasticsearch host:"
+      description: "Elasticsearch host to proxy to"
+      default: ''
+      required: true
+      type: "string"
+    #
+    # Elasticsearch protocall for target
+    #
+    - variable: "target_es_prot"
+      label: "Elasticsearch HTTP(S) Protocall:"
+      description: "http / https only"
+      default: 'https'
+      required: true
+      type: "string"
+    #
+    # Elasticsearch port for AWS
+    #
+    - variable: "target_es_port"
+      label: "Elasticsearch Port:"
+      description: "80 / 443 / 9200"
+      default: '443'
+      required: true
+      type: "string"
+    #
+    # labels to deploy Elastic search proxy access (for internal network)
+    #
+    - variable: "host_nodelabel"
+      label: "Deployment Log Server rancher Label:"
+      description: "Label for logging server with AWS Elasticsearch access, with ${label}=true value"
+      default: 'aws-logserver'
+      required: true
+      type: "string"
+    #
+    # labels to deploy Elastic search proxy access (for internal network)
+    #
+    - variable: "host_port"
+      label: "Deployment Log Server public HTTP port for elastic search"
+      description: "Uses default public port of 9200, to provide other instances ES access"
+      default: '9200'
+      required: true
+      type: "string"
+    #
+    # HTTP Auth user for auth layer elasticsearch (for internal network)
+    #
+    - variable: "host_user"
+      label: "Host Username:"
+      description: "The elasticsearch network host user (for internal traffic)"
+      default: 'elasticsearch'
+      required: true
+      type: "string"
+    #
+    # HTTP Auth pass for auth layer elasticsearch (for internal network)
+    #
+    - variable: "host_pass"
+      label: "Host Password:"
+      description: "The elasticsearch network host pass (for internal traffic) - avoid spaces, and dollar signs (not tested)"
+      default: 'SeriouslyChangeThisToSomeRandomlyGeneratedPassword'
+      required: true
+      type: "string"
+    #
+    # DNS server IP to use, this defaults to AWS local DNS, for your server default use blank
+    #
+    - variable: "dns_ip"
+      label: "DNS IP:"
+      description: "DNS server IP to use, this defaults to AWS local DNS, for your server DNS use blank"
+      default: '169.254.169.253'
+      required: false
+      type: "string"
+    #
+    # DNS server IP to use, this defaults to AWS local DNS, for your server default use blank
+    #
+    - variable: "dns_validity"
+      label: "DNS Validity time:"
+      description: "This can be set as blank to follow DNS declared settings, intentionally set to 10s to avoid DNS storms"
+      default: '10s'
+      required: false
+      type: "string"
+#
+# Actual service definition
+#
+version: '2'
+services:
+  elasticsearch-host-proxy:
+    start_on_create: true
