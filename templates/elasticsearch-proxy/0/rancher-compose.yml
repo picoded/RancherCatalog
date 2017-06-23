@@ -3,7 +3,7 @@
 #
 .catalog:
   name: "log to aws elasticsearch"
-  version: "v1.0.0"
+  version: "v1.0.1"
   description: "Elasticsearch proxy gateway, its main use case is to provide a proxy for AWS elasticsearch"
   minimum_rancher_version: v0.9.0
   uuid: es-proxy-0
