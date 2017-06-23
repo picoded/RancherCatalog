@@ -13,7 +13,7 @@
     #
     - variable: "es_host"
       label: "Elasticsearch host:"
-      description: "Elasticsearch host to connect to"
+      description: "Elasticsearch host to connect to, when possible avoid hostname with heavy DNS queries"
       default: ''
       required: true
       type: "string"

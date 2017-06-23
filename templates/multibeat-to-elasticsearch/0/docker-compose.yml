@@ -17,6 +17,7 @@ services:
       ES_PASS: ${es_pass}
       METRIC_PERIOD: ${metric_period}
     stdin_open: true
+    network_mode: host
     tty: true
     labels:
       io.rancher.scheduler.affinity:host_label_ne: ${host_avoidlabel}
