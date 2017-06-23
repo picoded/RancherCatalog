@@ -96,3 +96,5 @@ version: '2'
 services:
   elasticsearch-host-proxy:
     start_on_create: true
+  elasticsearch-insecure-proxy:
+    start_on_create: true

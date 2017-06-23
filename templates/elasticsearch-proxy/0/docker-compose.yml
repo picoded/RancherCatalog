@@ -4,11 +4,11 @@
 version: '2'
 services:
   #
-  # elasticsearch 
+  # elasticsearch host secure proxy
   #
   elasticsearch-host-proxy:
     mem_limit: 268435456
-    image: picoded/http-simple-proxy
+    image: picoded/http-simple-auth
     ports:
     - "${host_port}:80/tcp"
     environment:
@@ -16,6 +16,25 @@ services:
       FORWARD_PORT: ${target_es_port}
       FORWARD_HOST: ${target_es_host}
       HTPASSWD: "${host_user}:{PLAIN}${host_pass}"
+      DNS: "${dns_ip}"
+      DNS_VALID_TIMEOUT: "${dns_validity}"
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.scheduler.affinity:host_label: ${host_nodelabel}=true
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
+  #
+  # elasticsearch internal insecure proxy
+  #
+  elasticsearch-insecure-proxy:
+    mem_limit: 268435456
+    image: picoded/http-simple-proxy
+    environment:
+      FORWARD_PROT: ${target_es_prot}
+      FORWARD_PORT: ${target_es_port}
+      FORWARD_HOST: ${target_es_host}
       DNS: "${dns_ip}"
       DNS_VALID_TIMEOUT: "${dns_validity}"
     stdin_open: true
