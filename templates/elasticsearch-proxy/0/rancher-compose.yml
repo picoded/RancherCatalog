@@ -45,7 +45,7 @@
       required: true
       type: "string"
     #
-    # labels to deploy Elastic search proxy access (for internal network)
+    # open port to provide on host (with user/pass) (for internal network)
     #
     - variable: "host_port"
       label: "Deployment Log Server public HTTP port for elastic search"

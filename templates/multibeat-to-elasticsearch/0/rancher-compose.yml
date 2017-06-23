@@ -1,0 +1,80 @@
+#
+# Catalog options configuration
+#
+.catalog:
+  name: "multibeat to elasticsearch"
+  version: "v1.0.0"
+  description: "Elasticsearch proxy gateway, its main use case is to provide a proxy for AWS elasticsearch"
+  minimum_rancher_version: v0.9.0
+  uuid: es-multibeat-0
+  questions:
+    #
+    # Elasticsearch endpoint for AWS
+    #
+    - variable: "es_host"
+      label: "Elasticsearch host:"
+      description: "Elasticsearch host to connect to"
+      default: ''
+      required: true
+      type: "string"
+    #
+    # Elasticsearch protocall for target
+    #
+    - variable: "es_prot"
+      label: "Elasticsearch HTTP(S) Protocall:"
+      description: "http / https only"
+      default: 'http'
+      required: true
+      type: "string"
+    #
+    # Elasticsearch port for AWS
+    #
+    - variable: "es_port"
+      label: "Elasticsearch Port:"
+      description: "80 / 443 / 9200"
+      default: '9200'
+      required: true
+      type: "string"
+    #
+    # HTTP Auth user for auth layer elasticsearch
+    #
+    - variable: "es_user"
+      label: "Elasticsearch Username:"
+      description: "The elasticsearch user"
+      default: 'elasticsearch'
+      required: true
+      type: "string"
+    #
+    # HTTP Auth pass for auth layer elasticsearch
+    #
+    - variable: "es_pass"
+      label: "Elasticsearch Password:"
+      description: "The elasticsearch password"
+      default: 'SeriouslyChangeThisToSomeRandomlyGeneratedPassword'
+      required: true
+      type: "string"
+    #
+    # labels to AVOID deployment to
+    #
+    - variable: "metric_period"
+      label: "Metric interval/period:"
+      description: "Frequency in which metric is collected"
+      default: '1s'
+      required: true
+      type: "string"
+    #
+    # labels to AVOID deployment to
+    #
+    - variable: "host_avoidlabel"
+      label: "Deployment Log Server rancher Label:"
+      description: "labels to AVOID deployment"
+      default: 'no-multibeat=true, multibeat=false'
+      required: true
+      type: "string"
+#
+# Actual service definition
+#
+version: '2'
+services:
+  host-metricbeat:
+    start_on_create: true

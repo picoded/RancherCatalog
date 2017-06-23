@@ -1,0 +1,25 @@
+#
+# Docker container definition
+#
+version: '2'
+services:
+  #
+  # elasticsearch host secure proxy
+  #
+  host-metricbeat:
+    mem_limit: 268435456
+    image: picoded/host-metricbeat
+    environment:
+      ES_PROT: ${es_prot}
+      ES_HOST: ${es_host}
+      ES_PORT: ${es_port}
+      ES_USER: ${es_user}
+      ES_PASS: ${es_pass}
+      METRIC_PERIOD: ${metric_period}
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: ${host_avoidlabel}
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
