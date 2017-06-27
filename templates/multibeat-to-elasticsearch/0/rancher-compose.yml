@@ -3,7 +3,7 @@
 #
 .catalog:
   name: "multibeat to elasticsearch"
-  version: "v1.0.0"
+  version: "v1.0.1"
   description: "Elasticsearch proxy gateway, its main use case is to provide a proxy for AWS elasticsearch"
   minimum_rancher_version: v0.9.0
   uuid: es-multibeat-0
@@ -58,7 +58,7 @@
     #
     - variable: "metric_period"
       label: "Metric interval/period:"
-      description: "Frequency in which metric is collected"
+      description: "Frequency in which metric is collected, note that file system is fixed to 1m interval regardless"
       default: '1s'
       required: true
       type: "string"
@@ -76,5 +76,5 @@
 #
 version: '2'
 services:
-  host-metricbeat:
+  docker-metricbeat:
     start_on_create: true
