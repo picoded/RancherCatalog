@@ -17,6 +17,7 @@ services:
       ES_PASS: ${es_pass}
       METRIC_PERIOD: ${metric_period}
     stdin_open: true
+    network_mode: host
     volumes:
     - /proc/:/hostfs/proc/:ro
     - /sys/fs/cgroup/:/hostfs/sys/fs/cgroup/:ro
