@@ -68,7 +68,7 @@
     - variable: "filebeat_index_prefix"
       label: "Filebeat index prefix:"
       description: "Logging index prefix, note that -%{+yyyy.MM.dd} will be appended"
-      default: 'logbeat'
+      default: 'filebeat'
       required: true
       type: "string"
     #
