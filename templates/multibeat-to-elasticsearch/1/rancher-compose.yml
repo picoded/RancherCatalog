@@ -54,10 +54,10 @@
     #
     # Metricbeat index to store in
     #
-    - variable: "metric_index_prefix"
+    - variable: "metricbeat_index_prefix"
       label: "Metricbeat index prefix:"
       description: "Metric index prefix, note that -%{+yyyy.MM.dd} will be appended"
-      default: 'metricbeat-'
+      default: 'metricbeat'
       required: true
       type: "string"
     #
@@ -66,7 +66,7 @@
     - variable: "filebeat_index_prefix"
       label: "Filebeat index prefix:"
       description: "Logging index prefix, note that -%{+yyyy.MM.dd} will be appended"
-      default: 'logbeat-'
+      default: 'logbeat'
       required: true
       type: "string"
     #

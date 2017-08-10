@@ -15,6 +15,7 @@ services:
       ES_PORT: ${es_port}
       ES_USER: ${es_user}
       ES_PASS: ${es_pass}
+      ES_INDEX: ${metricbeat_index_prefix}-%{+yyyy.MM.dd}
       METRIC_PERIOD: ${metric_period}
     stdin_open: true
     network_mode: host
@@ -44,6 +45,7 @@ services:
       ES_PORT: ${es_port}
       ES_USER: ${es_user}
       ES_PASS: ${es_pass}
+      ES_INDEX: ${filebeat_index_prefix}-%{+yyyy.MM.dd}
       ES_BATCHSIZE: 20
       LOG_LINE_MAX: 250000
     stdin_open: true
