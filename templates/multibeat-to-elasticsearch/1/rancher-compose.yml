@@ -3,7 +3,7 @@
 #
 .catalog:
   name: "multibeat to elasticsearch"
-  version: "v1.0.1"
+  version: "v1.1.0"
   description: "Elasticsearch proxy gateway, its main use case is to provide a proxy for AWS elasticsearch"
   minimum_rancher_version: v0.9.0
   uuid: es-multibeat-0
@@ -52,12 +52,30 @@
       default: 'SeriouslyChangeThisToSomeRandomlyGeneratedPassword'
       type: "string"
     #
+    # Metricbeat index to store in
+    #
+    - variable: "metric_index_prefix"
+      label: "Metricbeat index prefix:"
+      description: "Metric index prefix, note that -%{+yyyy.MM.dd} will be appended"
+      default: 'metricbeat-'
+      required: true
+      type: "string"
+    #
+    # Metricbeat index to store in
+    #
+    - variable: "filebeat_index_prefix"
+      label: "Filebeat index prefix:"
+      description: "Logging index prefix, note that -%{+yyyy.MM.dd} will be appended"
+      default: 'logbeat-'
+      required: true
+      type: "string"
+    #
     # labels to AVOID deployment to
     #
     - variable: "metric_period"
       label: "Metric interval/period:"
       description: "Frequency in which metric is collected, note that file system is fixed to 1m interval regardless"
-      default: '1s'
+      default: '10s'
       required: true
       type: "string"
     #
