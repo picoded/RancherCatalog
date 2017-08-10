@@ -40,16 +40,18 @@
     #
     - variable: "es_user"
       label: "Elasticsearch Username:"
-      description: "The elasticsearch user"
+      description: "The elasticsearch user, if auth is disabled just fill in anything"
       default: 'elasticsearch'
+      required: true
       type: "string"
     #
     # HTTP Auth pass for auth layer elasticsearch
     #
     - variable: "es_pass"
       label: "Elasticsearch Password:"
-      description: "The elasticsearch password"
+      description: "The elasticsearch password, if auth is disabled just fill in anything"
       default: 'SeriouslyChangeThisToSomeRandomlyGeneratedPassword'
+      required: true
       type: "string"
     #
     # Metricbeat index to store in
