@@ -49,6 +49,7 @@ services:
       ES_BATCHSIZE: 20
       LOG_LINE_MAX: 250000
     stdin_open: true
+    network_mode: host
     volumes:
     - /var/lib/docker/containers/:/var/lib/docker/containers/:rw
     - /var/lib/filebeat/:/var/lib/filebeat/:rw

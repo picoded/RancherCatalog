@@ -13,7 +13,7 @@
     #
     - variable: "es_host"
       label: "Elasticsearch host:"
-      description: "Elasticsearch host to connect to, when possible avoid hostname with heavy DNS queries"
+      description: "Elasticsearch host to connect to, this is required to be the host IP address, as metricbeat binds to host network interface"
       default: ''
       required: true
       type: "string"
@@ -54,6 +54,15 @@
       required: true
       type: "string"
     #
+    # labels to AVOID deployment to
+    #
+    - variable: "metric_period"
+      label: "Metric interval/period:"
+      description: "Frequency in which metric is collected, note that file system is fixed to 1m interval regardless"
+      default: '10s'
+      required: true
+      type: "string"
+    #
     # Metricbeat index to store in
     #
     - variable: "metricbeat_index_prefix"
@@ -69,15 +78,6 @@
       label: "Filebeat index prefix:"
       description: "Logging index prefix, note that -%{+yyyy.MM.dd} will be appended"
       default: 'filebeat'
-      required: true
-      type: "string"
-    #
-    # labels to AVOID deployment to
-    #
-    - variable: "metric_period"
-      label: "Metric interval/period:"
-      description: "Frequency in which metric is collected, note that file system is fixed to 1m interval regardless"
-      default: '10s'
       required: true
       type: "string"
     #
