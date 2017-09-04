@@ -1,0 +1,48 @@
+version: '2'
+services:
+  public-HTTPS:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      default_cert: ${default-cert}
+      port_rules:
+      - hostname: ''
+        priority: 1
+        protocol: https
+        service: hello-world
+        source_port: 443
+        target_port: 80
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000
+  public-HTTP:
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - hostname: ''
+        path: ''
+        priority: 1
+        protocol: http
+        service: https-307-redirect
+        source_port: 80
+        target_port: 80
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000
+  hello-world:
+    scale: 2
+    start_on_create: true
+  https-307-redirect:
+    start_on_create: true

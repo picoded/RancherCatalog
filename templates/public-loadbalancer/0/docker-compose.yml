@@ -1,0 +1,33 @@
+version: '2'
+services:
+  public-HTTPS:
+    image: rancher/lb-service-haproxy:v0.7.5
+    ports:
+    - 443:443/tcp
+    labels:
+      io.rancher.scheduler.affinity:host_label: public-loadbalancer=true
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+  public-HTTP:
+    image: rancher/lb-service-haproxy:v0.7.5
+    ports:
+    - 80:80/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.global: 'true'
+  hello-world:
+    image: picoded/hello-world
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: public-loadbalancer=true
+  https-307-redirect:
+    image: picoded/https-redirect
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.scheduler.affinity:host_label: public-loadbalancer=true
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
