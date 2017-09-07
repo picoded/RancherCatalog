@@ -1,16 +1,14 @@
 version: '2'
 services:
   public-HTTPS:
-    scale: 1
     start_on_create: true
     lb_config:
       certs: []
       default_cert: wildcard.uilicious-dev.com
       port_rules:
-      - hostname: ''
-        priority: 1
+      - priority: 1
         protocol: https
-        service: hello-world
+        service: main-LB
         source_port: 443
         target_port: 80
     health_check:
@@ -20,20 +18,80 @@ services:
       unhealthy_threshold: 3
       initializing_timeout: 60000
       interval: 2000
+      strategy: recreate
       reinitializing_timeout: 60000
   traefik-conf:
+    metadata:
+      traefik: &id001
+        ssl_crt: ''
+        ssl_key: ''
+    retain_ip: true
     scale: 1
     start_on_create: true
+  private-HTTP:
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: main-LB
+        source_port: 8000
+        target_port: 80
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
   public-HTTP:
     start_on_create: true
     lb_config:
       certs: []
       port_rules:
-      - hostname: ''
+      - priority: 1
+        protocol: http
+        service: https-307-redirect
+        source_port: 80
+        target_port: 80
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  traefik:
+    metadata:
+      traefik: *id001
+    retain_ip: true
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 5000
+      port: 8000
+      unhealthy_threshold: 3
+      interval: 5000
+      strategy: recreate
+      request_line: GET /dashboard/# HTTP/1.0
+  hello-world:
+    scale: 2
+    start_on_create: true
+  main-LB:
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - hostname: hello-world.*
         path: ''
         priority: 1
         protocol: http
-        service: https-307-redirect
+        service: hello-world
         source_port: 80
         target_port: 80
     health_check:
@@ -44,18 +102,5 @@ services:
       initializing_timeout: 60000
       interval: 2000
       reinitializing_timeout: 60000
-  traefik:
-    start_on_create: true
-    health_check:
-      response_timeout: 5000
-      healthy_threshold: 2
-      port: 8000
-      unhealthy_threshold: 3
-      interval: 5000
-      strategy: recreate
-      request_line: GET "/dashboard/#" "HTTP/1.0"
-  hello-world:
-    scale: 2
-    start_on_create: true
   https-307-redirect:
     start_on_create: true
