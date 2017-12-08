@@ -4,7 +4,7 @@
 .catalog:
   name: "gce-docker"
   version: "v1.0.0"
-  description: "Installation of gce-docker plugin, see https://github.com/mcuadros/gce-docker. Use `gce-docker=false` for instances that you do not want this program to run"
+  description: "Installation of gce-docker plugin, see https://github.com/mcuadros/gce-docker. "
   minimum_rancher_version: v0.9.0
   uuid: picoded-gce-docker-0
 #
