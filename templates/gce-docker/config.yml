@@ -1,0 +1,14 @@
+# Name of the Catalog Entry
+name: "gce-docker volume plugin"
+# Description of the Catalog Entry
+description: "Installation of gce-docker plugin, see https://github.com/mcuadros/gce-docker"
+# Version of the Catalog to be used
+version: "v1.0.0"
+# Category to be used for searching catalog entries
+category: gce-docker
+# The maintainer of the catalog entry
+maintainer: eugene@picoded.com
+# The license
+license: GPL Version 3
+# A URL related to the catalog entry
+projectURL: https://github.com/picoded/rancher-catalog

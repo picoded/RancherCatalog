@@ -1,0 +1,16 @@
+#
+# Catalog options configuration
+#
+.catalog:
+  name: "gce-docker"
+  version: "v1.0.0"
+  description: "Installation of gce-docker plugin, see https://github.com/mcuadros/gce-docker. Use `gce-docker=false` for instances that you do not want this program to run"
+  minimum_rancher_version: v0.9.0
+  uuid: picoded-gce-docker-0
+#
+# Actual service definition
+#
+version: '2'
+services:
+  gce-docker:
+    start_on_create: true
