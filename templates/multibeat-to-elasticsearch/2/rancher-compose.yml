@@ -68,7 +68,7 @@
     - variable: "metricbeat_index"
       label: "Metricbeat index:"
       description: "Metric index, note that -%{+yyyy.MM} will store on a monthly basis"
-      default: 'metricbeat-%{+yyyy.MM.dd}'
+      default: 'metricbeat-%{+yyyy.MM}'
       required: true
       type: "string"
     #
