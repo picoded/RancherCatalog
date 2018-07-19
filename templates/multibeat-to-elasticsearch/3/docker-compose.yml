@@ -1,0 +1,62 @@
+#
+# Docker container definition
+#
+version: '2'
+services:
+  #
+  # Metric's from docker to elasticsearch pipeline
+  #
+  docker-metricbeat:
+    mem_limit: 268435456
+    image: picoded/docker-metricbeat
+    environment:
+      ES_PROT: ${es_prot}
+      ES_HOST: ${es_host}
+      ES_PORT: ${es_port}
+      ES_USER: ${es_user}
+      ES_PASS: ${es_pass}
+      ES_INDEX: ${metricbeat_index}
+      METRIC_PERIOD: ${metric_period}
+    stdin_open: true
+    network_mode: host
+    volumes:
+    - /proc/:/hostfs/proc/:ro
+    - /sys/fs/cgroup/:/hostfs/sys/fs/cgroup/:ro
+    - /etc/hostname:/hostfs/etc/hostname:ro
+    - /var/lib/docker/:/hostfs/var/lib/docker:ro
+    - /var/run/docker.sock:/hostfs/var/run/docker.sock:rw
+    tty: true
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: ${host_avoidlabel}
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
+  #
+  # filebeat log collection, YES!
+  #
+  # Excludes servers with no-(essential/logrotate/filebeat) labels
+  #
+  docker-filebeat:
+    mem_limit: 268435456
+    image: picoded/docker-filebeat
+    environment:
+      ES_PROT: ${es_prot}
+      ES_HOST: ${es_host}
+      ES_PORT: ${es_port}
+      ES_USER: ${es_user}
+      ES_PASS: ${es_pass}
+      ES_INDEX: ${filebeat_index}
+      ES_BATCHSIZE: 20
+      LOG_LINE_MAX: 250000
+    stdin_open: true
+    network_mode: host
+    volumes:
+    - /var/lib/docker/containers/:/var/lib/docker/containers/:rw
+    - /var/lib/filebeat/:/var/lib/filebeat/:rw
+    - /var/run/docker.sock:/var/run/docker.sock:rw
+    tty: true
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: ${host_avoidlabel}
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
